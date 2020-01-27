@@ -1,11 +1,11 @@
 (ns tennis.tennis-test
   (:require [clojure.test :refer :all]
-            [tennis.tennis-game1 :refer :all]))
+            [tennis.tennis-game3 :refer :all]))
 
 (defn check-all-scores2 [p1-score p2-score]
   (do
-    (reset! m_score_1 0)
-    (reset! m_score_2 0)
+    (reset! p1 0)
+    (reset! p2 0)
     (repeatedly p1-score #(won-point "player1"))
     (repeatedly p2-score #(won-point "player2"))
     (get-score))
@@ -13,8 +13,8 @@
 
 (defn check-all-scores [p1-score p2-score]
   (do
-    (reset! m_score_1 p1-score)
-    (reset! m_score_2 p2-score)
+    (reset! p1 p1-score)
+    (reset! p2 p2-score)
     (get-score))
   )
 
