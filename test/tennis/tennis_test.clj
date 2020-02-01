@@ -1,10 +1,13 @@
 (ns tennis.tennis-test
   (:require [clojure.test :refer :all]
             [tennis.tennis-game :refer :all]
+            [tennis.tennis-game1 :refer :all]
             [tennis.tennis-game3 :refer :all]
             )
-  (:import (tennis.tennis_game3 TennisGame3)))
+  (:import (tennis.tennis_game3 TennisGame3)
+           (tennis.tennis_game1 TennisGame1)))
 
+(def tennis-game1 (TennisGame1. "" ""))
 (def tennis-game3 (TennisGame3. "" ""))
 
 
@@ -20,9 +23,9 @@
 
 (defn check-all-scores [p1-score p2-score]
   (do
-    (reset! p1 p1-score)
-    (reset! p2 p2-score)
-    (get-score tennis-game3))
+    (reset! m_score_1 p1-score)
+    (reset! m_score_2 p2-score)
+    (get-score tennis-game1))
   )
 
 (deftest check-all-scores-tennis-game-1
