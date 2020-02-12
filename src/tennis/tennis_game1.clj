@@ -8,8 +8,8 @@
   TennisGame
   (won-point [_ player_name]
     (cond
-      (= player_name "player1") (reset! m_score_1 (inc @m_score_1))
-      :else (reset! m_score_2 (inc @m_score_2))
+      (= player_name "player1") (swap! m_score_1 (inc @m_score_1))
+      :else (swap! m_score_2 (inc @m_score_2))
       )
     )
 

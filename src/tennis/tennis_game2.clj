@@ -3,6 +3,8 @@
 
 (def P1point (atom 0))
 (def P2point (atom 0))
+(def P1res (atom ""))
+(def P2res (atom ""))
 
 (defn less-than-4 []
   (if (and (= @P1point @P2point) (< @P1point 4))
@@ -25,44 +27,48 @@
 
 (defn p2love [score]
   (if (and (> @P1point 0) (= @P2point 0))
-    (let [P1res (cond
-                  (= @P1point 1) "Fifteen"
-                  (= @P1point 2) "Thirty"
-                  (= @P1point 3) "Forty"
-                  )
-          P2res (str "Love")]
-      (str P1res "-" P2res)
+    (do
+      (cond
+        (= @P1point 1) (reset! P1res "Fifteen")
+        (= @P1point 2) (reset! P1res "Thirty")
+        (= @P1point 3) (reset! P1res "Forty")
+        )
+      (reset! P2res "Love")
+      (str @P1res "-" @P2res)
       )
     score
     )
   )
+
 
 (defn p1love [score]
   (if (and (> @P2point 0) (= @P1point 0))
-    (let [P2res (cond
-                  (= @P2point 1) "Fifteen"
-                  (= @P2point 2) "Thirty"
-                  (= @P2point 3) "Forty"
-                  )
-          P1res (str "Love")]
-      (str "Love" "-" P2res)
+    (do
+      (cond
+        (= @P2point 1) (reset! P2res "Fifteen")
+        (= @P2point 2) (reset! P2res "Thirty")
+        (= @P2point 3) (reset! P2res "Forty")
+        )
+      (reset! P1res "Love")
+      (str @P1res "-" @P2res)
       )
     score
     )
   )
 
+
 (defn do-p1point [score]
   (if (and (> @P1point @P2point) (< @P1point 4))
-    (let [P1res (cond
-                  (= @P1point 2) "Thirty"
-                  (= @P1point 3) "Forty"
-                  )
-          P2res (cond
-                  (= @P2point 1) "Fifteen"
-                  (= @P2point 2) "Thirty"
-                  )
-          ]
-      (str P1res "-" P2res)
+    (do
+      (cond
+        (= @P1point 2) (reset! P1res "Thirty")
+        (= @P1point 3) (reset! P1res "Forty")
+        )
+      (cond
+        (= @P2point 1) (reset! P2res "Fifteen")
+        (= @P2point 2) (reset! P2res "Thirty")
+        )
+      (str @P1res "-" @P2res)
       )
     score
     )
@@ -70,16 +76,16 @@
 
 (defn do-p2point [score]
   (if (and (> @P2point @P1point) (< @P2point 4))
-    (let [P2res (cond
-                  (= @P2point 2) "Thirty"
-                  (= @P2point 3) "Forty"
-                  )
-          P1res (cond
-                  (= @P1point 1) "Fifteen"
-                  (= @P1point 2) "Thirty"
-                  )
-          ]
-      (str P1res "-" P2res)
+    (do
+      (cond
+        (= @P2point 2) (reset! P2res "Thirty")
+        (= @P2point 3) (reset! P2res "Forty")
+        )
+      (cond
+        (= @P1point 1) (reset! P1res "Fifteen")
+        (= @P1point 2) (reset! P1res "Thirty")
+        )
+      (str @P1res "-" @P2res)
       )
     score
     )

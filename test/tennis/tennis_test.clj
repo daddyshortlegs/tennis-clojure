@@ -14,16 +14,6 @@
 (def tennis-game3 (TennisGame3. "" ""))
 
 
-
-(defn check-all-scores2 [p1-score p2-score]
-  (do
-    (reset! p1 0)
-    (reset! p2 0)
-    (repeatedly p1-score #(won-point tennis-game3 "player1"))
-    (repeatedly p2-score #(won-point tennis-game3 "player2"))
-    (get-score tennis-game3))
-  )
-
 (defn check-all-scores [p1-score p2-score]
   (do
     (reset! P1point p1-score)
@@ -32,42 +22,45 @@
   )
 
 (deftest check-all-scores-tennis-game-1
-  (is (= "Love-All" (check-all-scores 0 0)))
-  (is (= "Fifteen-All" (check-all-scores 1 1)))
-  (is (= "Thirty-All" (check-all-scores 2 2)))
-  (is (= "Deuce" (check-all-scores 3 3)))
-  (is (= "Deuce" (check-all-scores 4 4)))
+  (are [result score1 score2] (= result (check-all-scores score1 score2))
+                              "Love-All" 0 0,
+                              "Fifteen-All" 1 1,
+                              "Thirty-All" 2 2,
+                              "Deuce" 3 3,
+                              "Deuce" 4 4
 
-  ;(is (= "Fifteen-Love" (check-all-scores 1 0)))
-  ;(is (= "Love-Fifteen" (check-all-scores 0 1)))
-  ;(is (= "Thirty-Love" (check-all-scores 2 0)))
-  ;(is (= "Love-Thirty" (check-all-scores 0 2)))
-  ;(is (= "Forty-Love" (check-all-scores 3 0)))
-  ;(is (= "Love-Forty" (check-all-scores 0 3)))
-  (is (= "Win for player1" (check-all-scores 4 0)))
-  (is (= "Win for player2" (check-all-scores 0 4)))
+                              "Fifteen-Love" 1 0
+                              "Love-Fifteen" 0 1
+                              "Thirty-Love" 2 0
+                              "Love-Thirty" 0 2
+                              "Forty-Love" 3 0
+                              "Love-Forty" 0 3
+                              "Win for player1" 4 0
+                              "Win for player2" 0 4
 
-  (is (= "Thirty-Fifteen" (check-all-scores 2 1)))
-  (is (= "Fifteen-Thirty" (check-all-scores 1 2)))
-  (is (= "Forty-Fifteen" (check-all-scores 3 1)))
-  (is (= "Fifteen-Forty" (check-all-scores 1 3)))
-  (is (= "Win for player1" (check-all-scores 4 1)))
-  (is (= "Win for player2" (check-all-scores 1 4)))
+                              "Thirty-Fifteen" 2 1
+                              "Fifteen-Thirty" 1 2
+                              "Forty-Fifteen" 3 1
+                              "Fifteen-Forty" 1 3
+                              "Win for player1" 4 1
+                              "Win for player2" 1 4
 
-  (is (= "Forty-Thirty" (check-all-scores 3 2)))
-  (is (= "Thirty-Forty" (check-all-scores 2 3)))
-  (is (= "Win for player1" (check-all-scores 4 2)))
-  (is (= "Win for player2" (check-all-scores 2 4)))
+                              "Forty-Thirty" 3 2
+                              "Thirty-Forty" 2 3
+                              "Win for player1" 4 2
+                              "Win for player2" 2 4
 
-  (is (= "Advantage player1" (check-all-scores 4 3)))
-  (is (= "Advantage player2" (check-all-scores 3 4)))
-  (is (= "Advantage player1" (check-all-scores 5 4)))
-  (is (= "Advantage player2" (check-all-scores 4 5)))
-  (is (= "Advantage player1" (check-all-scores 15 14)))
-  (is (= "Advantage player2" (check-all-scores 14 15)))
+                              "Advantage player1" 4 3
+                              "Advantage player2" 3 4
+                              "Advantage player1" 5 4
+                              "Advantage player2" 4 5
+                              "Advantage player1" 15 14
+                              "Advantage player2" 14 15
 
-  (is (= "Win for player1" (check-all-scores 6 4)))
-  (is (= "Win for player2" (check-all-scores 4 6)))
-  (is (= "Win for player1" (check-all-scores 16 14)))
-  (is (= "Win for player2" (check-all-scores 14 16)))
+                              "Win for player1" 6 4
+                              "Win for player2" 4 6
+                              "Win for player1" 16 14
+                              "Win for player2" 14 16
+
+                              )
   )

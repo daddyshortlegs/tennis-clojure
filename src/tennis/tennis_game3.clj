@@ -22,8 +22,8 @@
 
   (won-point [_ player_name]
     (cond
-      (= player_name "player1") (reset! p1 (inc @p1))
-      :else (reset! p2 (inc @p2))
+      (= player_name "player1") (swap! p1 (inc @p1))
+      :else (swap! p2 (inc @p2))
       )
     )
   )
